@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     tools:context=".MainFragment">
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fondoss"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        android:alpha=".60" />
+
     <Button
         android:id="@+id/buttonRecetas"
         android:layout_width="160dp"
@@ -41,7 +52,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="112dp"
-        android:text="Pantalla Inicial"
+        android:fontFamily="sans-serif-black"
+        android:text="Selecciona una opción"
+        android:textColor="#FFFFFF"
+        android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonRecetas"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
