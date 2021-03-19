@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/perfil"
+        android:name="edu.itesm.appcocina.Perfil"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="edu.itesm.appcocina.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_perfil"
+            app:destination="@id/perfil" />
+        <action
+            android:id="@+id/action_mainFragment_to_listaSuper"
+            app:destination="@id/listaSuper" />
+        <action
+            android:id="@+id/action_mainFragment_to_recetas"
+            app:destination="@id/recetas" />
+    </fragment>
+    <fragment
+        android:id="@+id/recetas"
+        android:name="edu.itesm.appcocina.Recetas"
+        android:label="fragment_recetas"
+        tools:layout="@layout/fragment_recetas" >
+        <action
+            android:id="@+id/action_recetas_to_misRecetas"
+            app:destination="@id/misRecetas" />
+        <action
+            android:id="@+id/action_recetas_to_favoritos"
+            app:destination="@id/favoritos" />
+    </fragment>
+    <fragment
+        android:id="@+id/listaSuper"
+        android:name="edu.itesm.appcocina.ListaSuper"
+        android:label="fragment_lista_super"
+        tools:layout="@layout/fragment_lista_super" />
+    <fragment
+        android:id="@+id/misRecetas"
+        android:name="edu.itesm.appcocina.MisRecetas"
+        android:label="fragment_mis_recetas"
+        tools:layout="@layout/fragment_mis_recetas" />
+    <fragment
+        android:id="@+id/favoritos"
+        android:name="edu.itesm.appcocina.Favoritos"
+        android:label="fragment_favoritos"
+        tools:layout="@layout/fragment_favoritos" />
+</navigation>
