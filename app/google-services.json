@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "679243509437",
+    "project_id": "appcocina-1ef61",
+    "storage_bucket": "appcocina-1ef61.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679243509437:android:e4993041c88fd5a2a351d4",
+        "android_client_info": {
+          "package_name": "edu.itesm.appcocina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "679243509437-no0ibuqp6gk8gia9o0j351u911vmm76t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB5RkSKMRccYJMUWX6KGeeNDP81uejsF-U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679243509437-no0ibuqp6gk8gia9o0j351u911vmm76t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
