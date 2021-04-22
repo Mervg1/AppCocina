@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "40990713469",
+    "firebase_url": "https://appcocina2-default-rtdb.firebaseio.com",
+    "project_id": "appcocina2",
+    "storage_bucket": "appcocina2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:40990713469:android:ff9e7d9aa809966a907314",
+        "android_client_info": {
+          "package_name": "edu.itesm.appcocina"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "40990713469-jtkej3a99kjj2uoavkcvtvvgvcd18lkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJAHRVxWYjA_waIihd9MkK_AZ11lllavE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "40990713469-jtkej3a99kjj2uoavkcvtvvgvcd18lkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
