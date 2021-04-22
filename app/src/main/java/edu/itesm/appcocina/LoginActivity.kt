@@ -44,26 +44,7 @@ class LoginActivity : AppCompatActivity() {
             val intento = Intent(this, RegisterActivity::class.java)
             startActivity(intento)
             finish()
-            /*if (bind.correo.text.isNotEmpty() && bind.password.text.isNotEmpty()){
-                // utiliza la clase de FirebaseAuth:
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-
-                    bind.correo.text.toString(), //usuario y password
-                    bind.password.text.toString()
-
-                ).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        usuarioCreado() //Viene más adelante la función
-                        bind.correo.text.clear() //Limpiar las cajas de texto
-                        bind.password.text.clear()
-                    }
-                }.addOnFailureListener{
-                    // en caso de error
-                    Toast.makeText(this,it.toString(), Toast.LENGTH_LONG).show()
-
-                }
-
-            }*/
+           
         }
 
         bind.loginbtn.setOnClickListener {
@@ -87,13 +68,5 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun usuarioCreado(){
-        val builder = AlertDialog.Builder(this)
-        with(builder){
-            setTitle("usuario pokedex")
-            setMessage("Usuario creado con éxito!")
-            setPositiveButton("Ok",null)
-            show()
-        }
-    }
+
 }
