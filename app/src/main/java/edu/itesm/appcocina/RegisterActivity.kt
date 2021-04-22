@@ -56,10 +56,7 @@ class RegisterActivity : AppCompatActivity() {
                 ).addOnCompleteListener{
                     if(it.isSuccessful){
                         usuarioCreado() //Viene más adelante la función
-                        bind.correo.text.clear() //Limpiar las cajas de texto
-                        bind.password.text.clear()
-                        bind.nombre.text.clear()
-                        bind.apellidos.text.clear()
+
 
                         //Agregar Nombre y Apellidos a la información de usuario
                         // Evento hacia analytics
@@ -69,6 +66,11 @@ class RegisterActivity : AppCompatActivity() {
                         val perfil = Perfil(bind.nombre.text.toString(), bind.apellidos.text.toString(), bind.correo.text.toString())
                         val id = reference.push().key
                         reference.child(id!!).setValue(perfil)
+
+                        bind.correo.text.clear() //Limpiar las cajas de texto
+                        bind.password.text.clear()
+                        bind.nombre.text.clear()
+                        bind.apellidos.text.clear()
 
                         //Crea un intento y entra a MainActivity.
                         val intento = Intent(this, MainActivity::class.java)
