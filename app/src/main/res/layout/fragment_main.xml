@@ -8,55 +8,61 @@
     tools:context=".MainFragment">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/fondoMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/fondoss"
+        android:src="@drawable/fondo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        android:alpha=".60" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageView
+        android:id="@+id/logoMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
+        android:backgroundTint="#FF1C1C"
+        android:src="@drawable/logosinfondo"
+        app:layout_constraintBottom_toTopOf="@+id/buttonPerfil"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonPerfil"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="152dp"
+        android:background="#FF5555"
+        android:backgroundTint="#FB8C8C"
+        android:text="Perfil"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonRecetas"
-        android:layout_width="160dp"
-        android:layout_height="47dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FD6868"
+        android:backgroundTint="#FB8C8C"
         android:text="Recetas"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonSuper"
         app:layout_constraintStart_toStartOf="@+id/buttonSuper" />
 
-    <Button
-        android:id="@+id/buttonPerfil"
-        android:layout_width="160dp"
-        android:layout_height="44dp"
-        android:layout_marginBottom="272dp"
-        android:text="Perfil"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonSuper"
-        android:layout_width="160dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="36dp"
+        android:layout_width="256dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="16dp"
+        android:background="#FD6868"
+        android:backgroundTint="#FB8C8C"
         android:text="Lista de Super"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/buttonPerfil"
         app:layout_constraintStart_toStartOf="@+id/buttonPerfil" />
 
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="112dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Selecciona una opción"
-        android:textColor="#FFFFFF"
-        android:textSize="36sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonRecetas"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

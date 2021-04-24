@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         buttonPerfil.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_perfil)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_perfilUsuario)
         }
         buttonSuper.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_listaSuper)

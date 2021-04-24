@@ -6,24 +6,19 @@
     app:startDestination="@id/mainFragment">
 
     <fragment
-        android:id="@+id/perfil"
-        android:name="edu.itesm.appcocina.Perfil"
-        android:label="fragment_perfil"
-        tools:layout="@layout/fragment_perfil" />
-    <fragment
         android:id="@+id/mainFragment"
         android:name="edu.itesm.appcocina.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_perfil"
-            app:destination="@id/perfil" />
         <action
             android:id="@+id/action_mainFragment_to_listaSuper"
             app:destination="@id/listaSuper" />
         <action
             android:id="@+id/action_mainFragment_to_recetas"
             app:destination="@id/recetas" />
+        <action
+            android:id="@+id/action_mainFragment_to_perfilUsuario"
+            app:destination="@id/perfilUsuario" />
     </fragment>
     <fragment
         android:id="@+id/recetas"
@@ -52,4 +47,9 @@
         android:name="edu.itesm.appcocina.Favoritos"
         android:label="fragment_favoritos"
         tools:layout="@layout/fragment_favoritos" />
+    <fragment
+        android:id="@+id/perfilUsuario"
+        android:name="edu.itesm.appcocina.PerfilUsuario"
+        android:label="fragment_perfil_usuario"
+        tools:layout="@layout/fragment_perfil_usuario" />
 </navigation>
