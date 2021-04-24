@@ -2,9 +2,15 @@ package edu.itesm.appcocina
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -14,6 +20,10 @@ import edu.itesm.appcocina.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
+    //Ejemplo de API
+    private val url = "https://api.edamam.com/search?q=all&app_id=7721e889&app_key=33ebd1f304fac28cd7809a27ade6ce9b"
+    //private val url="https://disease.sh/v3/covid-19/countries"
+
     // variables de binding y FirebaseAuth:
     private lateinit var bind : ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
@@ -25,6 +35,11 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
+
+
+        //cargaDatos()
+
         database = FirebaseDatabase.getInstance()
         reference = database.getReference("usuarios")
 
@@ -35,6 +50,7 @@ class LoginActivity : AppCompatActivity() {
         // Inicializa objetos:
         auth = Firebase.auth
         setLoginRegister() //sigue en la siguiente sección.
+
     }
 
     private fun setLoginRegister(){
@@ -44,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
             val intento = Intent(this, RegisterActivity::class.java)
             startActivity(intento)
             finish()
-           
+
         }
 
         bind.loginbtn.setOnClickListener {
