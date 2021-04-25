@@ -16,6 +16,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/boxMain"
+        android:layout_width="341dp"
+        android:layout_height="579dp"
+        android:background="@drawable/box"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fondoMain"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/logoMain"
         android:layout_width="wrap_content"
@@ -24,7 +34,8 @@
         android:backgroundTint="#FF1C1C"
         android:src="@drawable/logosinfondo"
         app:layout_constraintBottom_toTopOf="@+id/buttonPerfil"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonPerfil"

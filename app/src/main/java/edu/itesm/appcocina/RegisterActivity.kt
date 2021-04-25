@@ -23,12 +23,15 @@ class RegisterActivity : AppCompatActivity() {
     //Base de datos
     private lateinit var database : FirebaseDatabase
     private lateinit var reference : DatabaseReference
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
 
         database = FirebaseDatabase.getInstance()
         reference = database.getReference("usuarios")
+
+
 
         //inicializa las variables:
         analytics = FirebaseAnalytics.getInstance(this)
