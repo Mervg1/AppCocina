@@ -25,6 +25,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
         database = FirebaseDatabase.getInstance()
         reference = database.getReference("usuarios")
 
@@ -34,6 +35,12 @@ class LoginActivity : AppCompatActivity() {
 
         // Inicializa objetos:
         auth = Firebase.auth
+
+        //Checar si el usuario ya estaba activo
+        val usuarioActivo = auth.currentUser
+        if(usuarioActivo != null){
+            startActivity(Intent(this, MainActivity::class.java))
+        }
         setLoginRegister() //sigue en la siguiente sección.
     }
 
@@ -68,21 +75,26 @@ class LoginActivity : AppCompatActivity() {
 
         bind.loginbtn.setOnClickListener {
             //Para ingresar cambia al método de signInWithEmailAndPassword
+            if(bind.correo.text.toString().isNotEmpty() && bind.password.text.toString().isNotEmpty()){
 
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                bind.correo.text.toString(),
-                bind.password.text.toString()
-            ).addOnCompleteListener{
-                if(it.isSuccessful){
-                    Toast.makeText(this,"Bienvenido Maestro Pokemon!", Toast.LENGTH_LONG).show()
-                    //Crea un intento y entra a MainActivity.
-                    val intento = Intent(this, MainActivity::class.java)
-                    startActivity(intento)
-                    finish()
 
-                }else{
-                    Toast.makeText(this,"Error en los datos!", Toast.LENGTH_LONG).show()
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(
+                    bind.correo.text.toString(),
+                    bind.password.text.toString()
+                ).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        Toast.makeText(this,"Bienvenido!", Toast.LENGTH_LONG).show()
+                        //Crea un intento y entra a MainActivity.
+                        val intento = Intent(this, MainActivity::class.java)
+                        startActivity(intento)
+                        finish()
+
+                    }else{
+                        Toast.makeText(this,"Error en los datos!", Toast.LENGTH_LONG).show()
+                    }
                 }
+            }else{
+                Toast.makeText(this,"Porfavor inserte valores en los campos!", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -90,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
     private fun usuarioCreado(){
         val builder = AlertDialog.Builder(this)
         with(builder){
-            setTitle("usuario pokedex")
+            setTitle("usuario de Appetitoso")
             setMessage("Usuario creado con éxito!")
             setPositiveButton("Ok",null)
             show()
