@@ -2,9 +2,15 @@ package edu.itesm.appcocina
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DatabaseReference
@@ -14,6 +20,10 @@ import edu.itesm.appcocina.databinding.ActivityLoginBinding
 
 
 class LoginActivity : AppCompatActivity() {
+    //Ejemplo de API
+    private val url = "https://api.edamam.com/search?q=all&app_id=7721e889&app_key=33ebd1f304fac28cd7809a27ade6ce9b"
+    //private val url="https://disease.sh/v3/covid-19/countries"
+
     // variables de binding y FirebaseAuth:
     private lateinit var bind : ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
@@ -42,6 +52,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
         setLoginRegister() //sigue en la siguiente sección.
+
     }
 
     private fun setLoginRegister(){
@@ -51,26 +62,7 @@ class LoginActivity : AppCompatActivity() {
             val intento = Intent(this, RegisterActivity::class.java)
             startActivity(intento)
             finish()
-            /*if (bind.correo.text.isNotEmpty() && bind.password.text.isNotEmpty()){
-                // utiliza la clase de FirebaseAuth:
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
 
-                    bind.correo.text.toString(), //usuario y password
-                    bind.password.text.toString()
-
-                ).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        usuarioCreado() //Viene más adelante la función
-                        bind.correo.text.clear() //Limpiar las cajas de texto
-                        bind.password.text.clear()
-                    }
-                }.addOnFailureListener{
-                    // en caso de error
-                    Toast.makeText(this,it.toString(), Toast.LENGTH_LONG).show()
-
-                }
-
-            }*/
         }
 
         bind.loginbtn.setOnClickListener {
@@ -99,13 +91,4 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun usuarioCreado(){
-        val builder = AlertDialog.Builder(this)
-        with(builder){
-            setTitle("usuario de Appetitoso")
-            setMessage("Usuario creado con éxito!")
-            setPositiveButton("Ok",null)
-            show()
-        }
-    }
 }

@@ -6,11 +6,17 @@ import android.os.Bundle
 import android.view.View
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.fragment_mis_recetas.*
 
 class MainActivity : AppCompatActivity() {
+    //private lateinit var misRecetasAdapter: MisRecetasAdapter
+    //private lateinit var receta : ArrayList<Receta>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        //initRecycler()
     }
 
     public fun logout(view: View){
