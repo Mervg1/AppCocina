@@ -1,6 +1,5 @@
 package edu.itesm.appcocina
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +14,7 @@ class MisRecetasAdapter(private val recetas : List<Receta>) :
     inner class MisRecetasViewHolder(renglon: View) : RecyclerView.ViewHolder(renglon){
         var name = renglon.findViewById<TextView>(R.id.name)
         var labels = renglon.findViewById<TextView>(R.id.labels)
-        var imagen = renglon.findViewById<ImageView>(R.id.imagen)
+        var imagen = renglon.findViewById<ImageView>(R.id.imagen_analizar)
     }
 
     //Crea el renglon

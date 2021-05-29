@@ -31,5 +31,8 @@ class MainFragment : Fragment() {
         buttonRecetas.setOnClickListener(){
             Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_recetas)
         }
+        buttonReconocer.setOnClickListener(){
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_imageRecognition)
+        }
     }
 }

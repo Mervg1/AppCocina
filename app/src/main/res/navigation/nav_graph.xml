@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_mainFragment_to_perfilUsuario"
             app:destination="@id/perfilUsuario" />
+        <action
+            android:id="@+id/action_mainFragment_to_imageRecognition"
+            app:destination="@id/imageRecognition" />
     </fragment>
     <fragment
         android:id="@+id/recetas"
@@ -52,4 +55,9 @@
         android:name="edu.itesm.appcocina.PerfilUsuario"
         android:label="fragment_perfil_usuario"
         tools:layout="@layout/fragment_perfil_usuario" />
+    <fragment
+        android:id="@+id/imageRecognition"
+        android:name="edu.itesm.appcocina.ImageRecognition"
+        android:label="fragment_image_recognition"
+        tools:layout="@layout/fragment_image_recognition" />
 </navigation>
