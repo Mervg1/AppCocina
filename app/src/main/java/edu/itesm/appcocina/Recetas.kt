@@ -20,10 +20,12 @@ class Recetas : Fragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         buttonMisRecetas.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_recetas_to_misRecetas)
+            //Navigation.findNavController(view).navigate(R.id.action_recetas_to_misRecetas)
+            Navigation.findNavController(view).navigate(R.id.action_recetas_to_searchFragment)
         }
         buttonFavoritos.setOnClickListener(){
-            Navigation.findNavController(view).navigate(R.id.action_recetas_to_favoritos)
+            //Navigation.findNavController(view).navigate(R.id.action_recetas_to_favoritos)
+            //Navigation.findNavController(view).navigate(R.id.action_recetas_to_recipeFragment)
         }
     }
 }
