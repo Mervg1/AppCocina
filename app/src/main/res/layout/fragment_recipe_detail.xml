@@ -9,8 +9,8 @@ tools:context=".view.detalle.RecipeDetailFragment">
 
     <ImageView
         android:id="@+id/imageDetail"
-        android:layout_width="401dp"
-        android:layout_height="107dp"
+        android:layout_width="159dp"
+        android:layout_height="103dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +84,9 @@ tools:context=".view.detalle.RecipeDetailFragment">
         android:id="@+id/url"
         android:layout_width="154dp"
         android:layout_height="39dp"
+        android:background="#FF5555"
+        android:backgroundTint="#FB8C8C"
+        android:textColor="#FFFFFF"
         android:text="More Info"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,5 +94,32 @@ tools:context=".view.detalle.RecipeDetailFragment">
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.947" />
+
+    <Button
+        android:id="@+id/Cart"
+        android:layout_width="135dp"
+        android:layout_height="43dp"
+        android:background="#FF5555"
+        android:backgroundTint="#FB8C8C"
+        android:textColor="#FFFFFF"
+        android:text="Add to cart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.715"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.416" />
+
+    <CheckBox
+        android:id="@+id/like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:button="@drawable/selector_wishlist_item"
+        app:useMaterialThemeColors="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageDetail"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.075" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
