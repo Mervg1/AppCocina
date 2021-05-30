@@ -32,8 +32,11 @@
             android:id="@+id/action_recetas_to_misRecetas"
             app:destination="@id/misRecetas" />
         <action
-            android:id="@+id/action_recetas_to_favoritos"
-            app:destination="@id/favoritos" />
+            android:id="@+id/action_recetas_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_recetas_to_searchNutriInfoFragment"
+            app:destination="@id/searchNutriInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/listaSuper"
@@ -46,11 +49,6 @@
         android:label="fragment_mis_recetas"
         tools:layout="@layout/fragment_mis_recetas" />
     <fragment
-        android:id="@+id/favoritos"
-        android:name="edu.itesm.appcocina.Favoritos"
-        android:label="fragment_favoritos"
-        tools:layout="@layout/fragment_favoritos" />
-    <fragment
         android:id="@+id/perfilUsuario"
         android:name="edu.itesm.appcocina.PerfilUsuario"
         android:label="fragment_perfil_usuario"
@@ -60,4 +58,51 @@
         android:name="edu.itesm.appcocina.ImageRecognition"
         android:label="fragment_image_recognition"
         tools:layout="@layout/fragment_image_recognition" />
+        android:id="@+id/recipeFragment"
+        android:name="edu.itesm.appcocina.view.lista.RecipeFragment"
+        android:label="fragment_recipe"
+        tools:layout="@layout/fragment_recipe" >
+        <action
+            android:id="@+id/action_recipeFragment_to_recipeDetailFragment"
+            app:destination="@id/recipeDetailFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/fade_in"
+            app:popExitAnim="@android:anim/fade_out" />
+        <argument
+            android:name="queryRecipe"
+            app:argType="edu.itesm.appcocina.model.QueryRecipe" />
+    </fragment>
+    <fragment
+        android:id="@+id/recipeDetailFragment"
+        android:name="edu.itesm.appcocina.view.detalle.RecipeDetailFragment"
+        android:label="fragment_recipe_detail"
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="results"
+            app:argType="edu.itesm.appcocina.model.RecipeResult" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="edu.itesm.appcocina.view.search.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchNutriInfoFragment"
+        android:name="edu.itesm.appcocina.view.search.SearchNutriInfoFragment"
+        android:label="fragment_search_nutri_info"
+        tools:layout="@layout/fragment_search_nutri_info" >
+        <action
+            android:id="@+id/action_searchNutriInfoFragment_to_nutriInfoFragment"
+            app:destination="@id/nutriInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nutriInfoFragment"
+        android:name="edu.itesm.appcocina.view.nutriinfo.NutriInfoFragment"
+        android:label="fragment_nutri_info"
+        tools:layout="@layout/fragment_nutri_info" />
 </navigation>

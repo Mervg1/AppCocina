@@ -29,10 +29,12 @@
 
     <Button
         android:id="@+id/buttonGuardarPerfil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="154dp"
+        android:layout_height="39dp"
+        android:background="#FF5555"
+        android:backgroundTint="#FB8C8C"
+        android:textColor="#FFFFFF"
         android:layout_marginBottom="108dp"
-        android:backgroundTint="#FF6A6A"
         android:text="Guardar cambios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
