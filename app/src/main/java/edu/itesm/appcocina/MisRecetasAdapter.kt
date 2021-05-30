@@ -14,7 +14,7 @@ class MisRecetasAdapter(private val recetas : List<Receta>) :
     inner class MisRecetasViewHolder(renglon: View) : RecyclerView.ViewHolder(renglon){
         var name = renglon.findViewById<TextView>(R.id.name)
         var labels = renglon.findViewById<TextView>(R.id.labels)
-        var imagen = renglon.findViewById<ImageView>(R.id.imagen_analizar)
+        var imagen = renglon.findViewById<ImageView>(R.id.imagen)
     }
 
     //Crea el renglon

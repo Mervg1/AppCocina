@@ -58,6 +58,7 @@
         android:name="edu.itesm.appcocina.ImageRecognition"
         android:label="fragment_image_recognition"
         tools:layout="@layout/fragment_image_recognition" />
+    <fragment
         android:id="@+id/recipeFragment"
         android:name="edu.itesm.appcocina.view.lista.RecipeFragment"
         android:label="fragment_recipe"

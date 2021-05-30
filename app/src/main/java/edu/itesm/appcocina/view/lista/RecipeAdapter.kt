@@ -3,6 +3,7 @@ package edu.itesm.appcocina.view.lista
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -43,6 +44,7 @@ class RecipeAdapter(val recipeClick: (Int) -> Unit) :
 
         holder.itemView.setOnClickListener{
             val action = RecipeFragmentDirections.actionRecipeFragmentToRecipeDetailFragment(recipe)
+            //Navigation.findNavController(it).navigate(R.id.action_recipeFragment_to_recipeDetailFragment)
             holder.itemView.findNavController().navigate(action)
         }
     }
