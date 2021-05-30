@@ -1,26 +1,14 @@
 package edu.itesm.appcocina.view.search
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import edu.itesm.appcocina.R
-import edu.itesm.appcocina.databinding.FragmentRecipeBinding
 import edu.itesm.appcocina.databinding.FragmentSearchBinding
 import edu.itesm.appcocina.model.QueryRecipe
-import edu.itesm.appcocina.model.RecipeResult
-import edu.itesm.appcocina.view.detalle.IngredientsAdapter
-import edu.itesm.appcocina.view.detalle.RecipeDetailFragmentArgs
-import edu.itesm.appcocina.view.lista.RecipeFragmentDirections
-import kotlinx.android.synthetic.main.fragment_recetas.*
-import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 import kotlinx.android.synthetic.main.fragment_search.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -63,7 +51,7 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         creaIngredients()
-        buttonSearch.setOnClickListener(){
+        buttonSearchNutri.setOnClickListener(){
             //Navigation.findNavController(view).navigate(R.id.action_recetas_to_misRecetas)
             /*infoRecipe = ArrayList<QueryRecipe>()
             (infoRecipe as ArrayList<QueryRecipe>).add(QueryRecipe(binding.spnElementos.selectedItem.toString(), binding.spnElementosDiet.selectedItem.toString(), binding.spnElementosHealth.selectedItem.toString(), binding.spnElementosCT.selectedItem.toString()))

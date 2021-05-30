@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_recetas_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_recetas_to_searchNutriInfoFragment"
+            app:destination="@id/searchNutriInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/listaSuper"
@@ -81,4 +84,18 @@
             android:id="@+id/action_searchFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/searchNutriInfoFragment"
+        android:name="edu.itesm.appcocina.view.search.SearchNutriInfoFragment"
+        android:label="fragment_search_nutri_info"
+        tools:layout="@layout/fragment_search_nutri_info" >
+        <action
+            android:id="@+id/action_searchNutriInfoFragment_to_nutriInfoFragment"
+            app:destination="@id/nutriInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nutriInfoFragment"
+        android:name="edu.itesm.appcocina.view.nutriinfo.NutriInfoFragment"
+        android:label="fragment_nutri_info"
+        tools:layout="@layout/fragment_nutri_info" />
 </navigation>
