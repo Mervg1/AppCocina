@@ -34,13 +34,10 @@
         <action
             android:id="@+id/action_recetas_to_searchFragment"
             app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_recetas_to_searchNutriInfoFragment"
-            app:destination="@id/searchNutriInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/listaSuper"
-        android:name="edu.itesm.appcocina.ListaSuper"
+        android:name="edu.itesm.appcocina.mvp.view.ListaSuper"
         android:label="fragment_lista_super"
         tools:layout="@layout/fragment_lista_super" />
     <fragment
@@ -60,7 +57,7 @@
         tools:layout="@layout/fragment_image_recognition" />
     <fragment
         android:id="@+id/recipeFragment"
-        android:name="edu.itesm.appcocina.view.lista.RecipeFragment"
+        android:name="edu.itesm.appcocina.mvvm.view.lista.RecipeFragment"
         android:label="fragment_recipe"
         tools:layout="@layout/fragment_recipe" >
         <action
@@ -76,7 +73,7 @@
     </fragment>
     <fragment
         android:id="@+id/recipeDetailFragment"
-        android:name="edu.itesm.appcocina.view.detalle.RecipeDetailFragment"
+        android:name="edu.itesm.appcocina.mvvm.view.detalle.RecipeDetailFragment"
         android:label="fragment_recipe_detail"
         tools:layout="@layout/fragment_recipe_detail" >
         <argument
@@ -85,25 +82,11 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="edu.itesm.appcocina.view.search.SearchFragment"
+        android:name="edu.itesm.appcocina.mvvm.view.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
             android:id="@+id/action_searchFragment_to_recipeFragment"
             app:destination="@id/recipeFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/searchNutriInfoFragment"
-        android:name="edu.itesm.appcocina.view.search.SearchNutriInfoFragment"
-        android:label="fragment_search_nutri_info"
-        tools:layout="@layout/fragment_search_nutri_info" >
-        <action
-            android:id="@+id/action_searchNutriInfoFragment_to_nutriInfoFragment"
-            app:destination="@id/nutriInfoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/nutriInfoFragment"
-        android:name="edu.itesm.appcocina.view.nutriinfo.NutriInfoFragment"
-        android:label="fragment_nutri_info"
-        tools:layout="@layout/fragment_nutri_info" />
 </navigation>

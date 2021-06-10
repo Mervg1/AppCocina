@@ -1,4 +1,4 @@
-package edu.itesm.appcocina.view.search
+package edu.itesm.appcocina.mvvm.view.search
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

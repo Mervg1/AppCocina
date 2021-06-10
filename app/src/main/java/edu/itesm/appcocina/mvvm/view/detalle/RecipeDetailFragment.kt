@@ -1,24 +1,22 @@
-package edu.itesm.appcocina.view.detalle
+package edu.itesm.appcocina.mvvm.view.detalle
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
-import edu.itesm.appcocina.HomeActivity
-import edu.itesm.appcocina.MisRecetasAdapter
-import edu.itesm.appcocina.R
-import edu.itesm.appcocina.RegisterActivity
-import edu.itesm.appcocina.databinding.FragmentRecipeBinding
 import edu.itesm.appcocina.databinding.FragmentRecipeDetailBinding
-import edu.itesm.appcocina.view.lista.RecipeAdapter
-import kotlinx.android.synthetic.main.fragment_mis_recetas.*
+import edu.itesm.appcocina.model.Ingredient
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
 
@@ -39,6 +37,9 @@ class RecipeDetailFragment : Fragment() {
 
     private val args = navArgs<RecipeDetailFragmentArgs>()
     private lateinit var binding : FragmentRecipeDetailBinding
+    private lateinit var database : FirebaseDatabase
+    private lateinit var reference : DatabaseReference
+    private lateinit var myRef : DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,11 +73,53 @@ class RecipeDetailFragment : Fragment() {
 
         creaIngredients()
 
+
+
         url.setOnClickListener {
 
             val intento = Intent(Intent.ACTION_VIEW, Uri.parse(args.value.results.recipe.url.toString()))
             startActivity(intento)
             
+        }
+
+        Cart.setOnClickListener {
+           addLista()
+            /*if (bind.correo.text.isNotEmpty() && bind.password.text.isNotEmpty() && bind.nombre.text.isNotEmpty() && bind.apellidos.text.isNotEmpty()){
+                // utiliza la clase de FirebaseAuth:
+                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
+
+                    bind.correo.text.toString(), //usuario y password
+                    bind.password.text.toString()
+
+                ).addOnCompleteListener{
+                    if(it.isSuccessful){
+                        usuarioCreado() //Viene más adelante la función
+
+
+                        //Agregar Nombre y Apellidos a la información de usuario
+                        // Evento hacia analytics
+                        bundle.putString("edu_itesm_appcocina_main", "added_user")
+                        analytics.logEvent("main",bundle)
+
+                        val perfil = Perfil(bind.nombre.text.toString(), bind.apellidos.text.toString(), bind.correo.text.toString())
+                        val id = reference.push().key
+                        reference.child(id!!).setValue(perfil)
+
+                        bind.correo.text.clear() //Limpiar las cajas de texto
+                        bind.password.text.clear()
+                        bind.nombre.text.clear()
+                        bind.apellidos.text.clear()
+
+                        //Crea un intento y entra a MainActivity.
+                        val intento = Intent(this, MainActivity::class.java)
+                        startActivity(intento)
+                        finish()
+                    }
+                }.addOnFailureListener{
+                    // en caso de error
+                    Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
+
+                }*/
         }
 
 
@@ -120,6 +163,42 @@ class RecipeDetailFragment : Fragment() {
             // set the custom adapter to the RecyclerView
 
             adapter = IngredientsAdapter(args.value.results.recipe.ingredientLines)
+        }
+
+    }
+
+    fun addLista(){
+
+
+
+        // Write a message to the database
+        // Write a message to the database
+
+
+        database = FirebaseDatabase.getInstance()
+        reference = database.getReference("ingredients")
+        //reference.child().key
+
+
+        val usuario = Firebase.auth.currentUser
+        Log.i("Boton", "Boton entro Cart")
+
+        if(args.value.results.recipe.ingredientLines.size > 0){
+            var sizeIng = args.value.results.recipe.ingredientLines.size
+
+
+            for (i in 0..sizeIng-1){
+                Log.i("Boton", args.value.results.recipe.ingredientLines[i].toString())
+                var idIng = reference.push().key
+                var ing = Ingredient(idIng!!,args.value.results.recipe.ingredientLines[i].toString(), usuario.email)
+                reference.child(idIng!!).setValue(ing)
+                //myRef.setValue(ing.toString())
+
+            }
+
+
+
+
         }
 
     }

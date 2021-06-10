@@ -1,10 +1,8 @@
-package edu.itesm.appcocina.viewmodel
+package edu.itesm.appcocina.mvvm.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import edu.itesm.appcocina.Service.RecipeService
-import edu.itesm.appcocina.model.QueryRecipe
+import edu.itesm.appcocina.mvvm.Service.RecipeService
 import edu.itesm.appcocina.model.RecipeResponse
 import edu.itesm.appcocina.model.RecipeResult
 import retrofit2.Call

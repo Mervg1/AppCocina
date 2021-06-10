@@ -1,4 +1,4 @@
-package edu.itesm.appcocina.view.lista
+package edu.itesm.appcocina.mvvm.view.lista
 
 import android.content.Intent
 import android.os.Bundle
@@ -7,26 +7,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
 import edu.itesm.appcocina.HomeActivity
-import edu.itesm.appcocina.MisRecetasAdapter
-import edu.itesm.appcocina.R
-import edu.itesm.appcocina.Receta
 import edu.itesm.appcocina.databinding.FragmentRecipeBinding
-import edu.itesm.appcocina.view.detalle.RecipeDetailFragmentArgs
-import edu.itesm.appcocina.viewmodel.RecipeViewModel
+import edu.itesm.appcocina.mvvm.viewmodel.RecipeViewModel
 import kotlinx.android.synthetic.main.fragment_mis_recetas.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

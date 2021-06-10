@@ -1,4 +1,4 @@
-package edu.itesm.appcocina.view.lista
+package edu.itesm.appcocina.mvvm.view.lista
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,12 +7,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import edu.itesm.appcocina.MisRecetasAdapter
-import edu.itesm.appcocina.R
-import edu.itesm.appcocina.Receta
-import edu.itesm.appcocina.databinding.FragmentRecipeBinding
 import edu.itesm.appcocina.databinding.RenglonRecetasLayoutBinding
-import edu.itesm.appcocina.model.Recipe
 import edu.itesm.appcocina.model.RecipeResult
 
 class RecipeAdapter(val recipeClick: (Int) -> Unit) :

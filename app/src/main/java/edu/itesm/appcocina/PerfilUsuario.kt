@@ -2,6 +2,7 @@ package edu.itesm.appcocina
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,6 +52,7 @@ class PerfilUsuario : Fragment() {
                     val keys = datas.key
                     reference.child(keys!!).get().addOnSuccessListener {
                         var foundmail = it.child("email").getValue().toString()
+                        Log.i("chwcar user", it.child("nombre").getValue().toString())
                         if (foundmail == user.email){
                             currUser = it
                             currId = keys;
