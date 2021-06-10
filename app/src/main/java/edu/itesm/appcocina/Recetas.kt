@@ -28,8 +28,5 @@ class Recetas : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_recetas_to_misRecetas)
         }
 
-        buttonNutriInfo.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_recetas_to_searchNutriInfoFragment)
-        }
     }
 }

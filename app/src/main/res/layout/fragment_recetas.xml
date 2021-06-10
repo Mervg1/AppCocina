@@ -38,21 +38,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.652" />
 
-    <Button
-        android:id="@+id/buttonNutriInfo"
-        android:layout_width="256dp"
-        android:layout_height="64dp"
-        android:background="#FF5555"
-        android:backgroundTint="#FB8C8C"
-        android:text="Nutritional Info"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788" />
-
     <TextView
         android:id="@+id/recetasTitulo"
         android:layout_width="429dp"

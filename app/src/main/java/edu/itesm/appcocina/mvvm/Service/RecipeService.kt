@@ -1,5 +1,4 @@
-package edu.itesm.appcocina.Service
-import edu.itesm.appcocina.model.Recipe
+package edu.itesm.appcocina.mvvm.Service
 import edu.itesm.appcocina.model.RecipeResponse
 import retrofit2.Call
 import retrofit2.http.GET

@@ -1,9 +1,7 @@
 package edu.itesm.appcocina.model
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
-import kotlinx.android.parcel.RawValue
 
 data class Recipe(
     val id: Int,
@@ -12,6 +10,14 @@ data class Recipe(
     val imagen: String?
 
 )
+
+data class Ingredient(
+    val id : String,
+    val ingredient : String,
+    val email : String
+){
+    constructor():this("","","")
+}
 
 @Parcelize
 data class QueryRecipe(
