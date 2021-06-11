@@ -7,58 +7,38 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 import com.google.firebase.ktx.Firebase
 import com.squareup.picasso.Picasso
 import edu.itesm.appcocina.databinding.FragmentRecipeDetailBinding
 import edu.itesm.appcocina.model.Ingredient
+import kotlinx.android.synthetic.main.fragment_perfil_usuario.*
 import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [RecipeDetailFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class RecipeDetailFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
     private val args = navArgs<RecipeDetailFragmentArgs>()
     private lateinit var binding : FragmentRecipeDetailBinding
     private lateinit var database : FirebaseDatabase
     private lateinit var reference : DatabaseReference
-    private lateinit var myRef : DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user : FirebaseUser
+    private lateinit var currId : String
+    private lateinit var currUser : DataSnapshot
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-
-
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentRecipeDetailBinding.inflate(inflater, container, false)
-
+        database = FirebaseDatabase.getInstance()
+        auth = Firebase.auth
+        reference = database.getReference("usuarios")
+        user = FirebaseAuth.getInstance().currentUser
         val view = binding.root
         return view
     }
@@ -71,97 +51,91 @@ class RecipeDetailFragment : Fragment() {
         calories.text = "Calories: ${args.value.results.recipe.calories.toString()}"
         totalTime.text = "Total Time : ${args.value.results.recipe.totalTime.toString()} m"
 
-        creaIngredients()
-
-
-
+        reference.get().addOnSuccessListener {
+            for (datas in it.children) {
+                val keys = datas.key
+                reference.child(keys!!).get().addOnSuccessListener {
+                    var email = it.child("email").getValue().toString()
+                    if (email == user.email){
+                        currUser = it
+                        currId = keys
+                        var comida = args.value.results.recipe.label
+                        var lista:MutableList<String> = it.child("favoritos").child("lista").getValue() as MutableList<String>
+                        like.isChecked = lista.contains(comida)
+                    }
+                }.addOnFailureListener{
+                    Toast.makeText(requireActivity(),"Error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.addOnFailureListener{
+            Toast.makeText(requireActivity(),"Error", Toast.LENGTH_SHORT).show()
+        }
         url.setOnClickListener {
 
             val intento = Intent(Intent.ACTION_VIEW, Uri.parse(args.value.results.recipe.url.toString()))
             startActivity(intento)
             
         }
+        like.setOnClickListener{
+
+                reference.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        for (datas in dataSnapshot.children) {
+                            val keys = datas.key
+                            reference.child(keys!!).get().addOnSuccessListener {
+                                var email = it.child("email").getValue().toString()
+                                Log.i("chwcar user", it.child("nombre").getValue().toString())
+                                if (email == user.email){
+                                    currUser = it
+                                    currId = keys
+                                    if(like.isChecked){ /// agregar a favoritos
+                                        var num = it.child("favoritos").child("size").getValue().toString().toInt()
+                                        var comida = args.value.results.recipe.label
+                                        if (num == 0){
+
+                                            var lista = mutableListOf(comida)
+                                            reference.child(currId).child("favoritos").child("lista").setValue(lista)
+                                            reference.child(currId).child("favoritos").child("size").setValue(num+1)
+                                        }else{
+                                            var lista:MutableList<String> = it.child("favoritos").child("lista").getValue() as MutableList<String>
+                                            if(!lista.contains(comida)){
+                                                lista.add(comida)
+                                                reference.child(currId).child("favoritos").child("lista").setValue(lista)
+                                                reference.child(currId).child("favoritos").child("size").setValue(num+1)
+                                            }
+                                        }
+                                    }else{ /// Quitar de favoritos
+                                        var num = it.child("favoritos").child("size").getValue().toString().toInt()
+                                        var comida = args.value.results.recipe.label
+                                        var lista:MutableList<String> = it.child("favoritos").child("lista").getValue() as MutableList<String>
+                                        lista.remove(comida)
+                                        reference.child(currId).child("favoritos").child("lista").setValue(lista)
+                                        reference.child(currId).child("favoritos").child("size").setValue(num-1)
+                                    }
+                                }
+                            }.addOnFailureListener{
+                                Toast.makeText(requireActivity(),"Error", Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                    }
+                    override fun onCancelled(databaseError: DatabaseError) {}
+                })
+
+
+        }
 
         Cart.setOnClickListener {
            addLista()
-            /*if (bind.correo.text.isNotEmpty() && bind.password.text.isNotEmpty() && bind.nombre.text.isNotEmpty() && bind.apellidos.text.isNotEmpty()){
-                // utiliza la clase de FirebaseAuth:
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(
-
-                    bind.correo.text.toString(), //usuario y password
-                    bind.password.text.toString()
-
-                ).addOnCompleteListener{
-                    if(it.isSuccessful){
-                        usuarioCreado() //Viene más adelante la función
-
-
-                        //Agregar Nombre y Apellidos a la información de usuario
-                        // Evento hacia analytics
-                        bundle.putString("edu_itesm_appcocina_main", "added_user")
-                        analytics.logEvent("main",bundle)
-
-                        val perfil = Perfil(bind.nombre.text.toString(), bind.apellidos.text.toString(), bind.correo.text.toString())
-                        val id = reference.push().key
-                        reference.child(id!!).setValue(perfil)
-
-                        bind.correo.text.clear() //Limpiar las cajas de texto
-                        bind.password.text.clear()
-                        bind.nombre.text.clear()
-                        bind.apellidos.text.clear()
-
-                        //Crea un intento y entra a MainActivity.
-                        val intento = Intent(this, MainActivity::class.java)
-                        startActivity(intento)
-                        finish()
-                    }
-                }.addOnFailureListener{
-                    // en caso de error
-                    Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
-
-                }*/
         }
 
-
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment RecipeDetailFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            RecipeDetailFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 
     private fun creaIngredients(){
         binding.ingredients.layoutManager = LinearLayoutManager(activity)
 
-
-        //binding.recyclerView.adapter = RecipeAdapter{
-       /* binding.ingredients.adapter = IngredientsAdapter{
-            val intent = Intent(activity, HomeActivity::class.java)
-            intent.putExtra("id", it)
-            startActivity(intent)
-        }*/
-
         ingredients.apply {
-            // set a LinearLayoutManager to handle Android
-            // RecyclerView behavior
             layoutManager = LinearLayoutManager(activity)
-            // set the custom adapter to the RecyclerView
-
             adapter = IngredientsAdapter(args.value.results.recipe.ingredientLines)
         }
 

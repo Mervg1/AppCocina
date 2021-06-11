@@ -67,8 +67,12 @@ class RegisterActivity : AppCompatActivity() {
                         analytics.logEvent("main",bundle)
 
                         val perfil = Perfil(bind.nombre.text.toString(), bind.apellidos.text.toString(), bind.correo.text.toString())
+
                         val id = reference.push().key
                         reference.child(id!!).setValue(perfil)
+                        val fav = ListaFavorito()
+                        reference.child(id!!).child("favoritos").setValue(fav)
+
 
                         bind.correo.text.clear() //Limpiar las cajas de texto
                         bind.password.text.clear()
@@ -85,46 +89,9 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.makeText(this, it.toString(), Toast.LENGTH_LONG).show()
 
                 }
-
-
-
-
-            }/*else{
-                Toast.makeText(applicationContext, "error", Toast.LENGTH_LONG).show()
-            }*/
-
-
-        }
-
-        /*bind.loginbtn.setOnClickListener {
-            // Valida que correo y password no esten vacíos, incluye:
-
-            //Para ingresar cambia al método de signInWithEmailAndPassword
-
-            FirebaseAuth.getInstance().signInWithEmailAndPassword(
-                bind.correo.text.toString(),
-                bind.password.text.toString()
-            ).addOnCompleteListener{
-                if(it.isSuccessful){
-                    Toast.makeText(this, "Bienvenido a Appetitoso", Toast.LENGTH_LONG).show()
-                    //Crea un intento y entra a MainActivity.
-                    Handler().postDelayed({
-                        val intento = Intent(this, MainActivity::class.java)
-                        startActivity(intento)
-                        finish()
-                    }, 3000)
-
-
-                }else{
-                    Toast.makeText(this, "Error en los datos!", Toast.LENGTH_LONG).show()
-                }
             }
-        }*/
-
-
-
+        }
     }
-
     private fun usuarioCreado(){
         val builder = AlertDialog.Builder(this)
         with(builder){

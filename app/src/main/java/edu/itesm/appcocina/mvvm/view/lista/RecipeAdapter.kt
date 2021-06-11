@@ -42,5 +42,6 @@ class RecipeAdapter(val recipeClick: (Int) -> Unit) :
             //Navigation.findNavController(it).navigate(R.id.action_recipeFragment_to_recipeDetailFragment)
             holder.itemView.findNavController().navigate(action)
         }
+
     }
 }

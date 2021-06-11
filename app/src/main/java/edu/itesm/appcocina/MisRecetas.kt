@@ -12,90 +12,105 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.fragment_mis_recetas.*
+import kotlinx.android.synthetic.main.fragment_recipe_detail.*
 
 
 class MisRecetas : Fragment() {
 
-    private val url = "https://api.edamam.com/search?q=all&app_id=7721e889&app_key=33ebd1f304fac28cd7809a27ade6ce9b&imagesize=thumbnail"
+
     val recetas = mutableListOf<Receta>()
+    private lateinit var database : FirebaseDatabase
+    private lateinit var reference : DatabaseReference
+    private lateinit var auth: FirebaseAuth
+    private lateinit var user : FirebaseUser
+    private lateinit var currId : String
+    private lateinit var currUser : DataSnapshot
+    private lateinit var lista:MutableList<String>
+
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        database = FirebaseDatabase.getInstance()
+        auth = Firebase.auth
+        reference = database.getReference("usuarios")
+        user = FirebaseAuth.getInstance().currentUser
         // Inflate the layout for this fragment
-        Log.i("This is the info of URL: ", url)
 
         return inflater.inflate(R.layout.fragment_mis_recetas, container, false)
     }
 
-    /*override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        initInteractions()
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        reference.get().addOnSuccessListener {
+            for (datas in it.children) {
+                val keys = datas.key
+                reference.child(keys!!).get().addOnSuccessListener {
+                    var email = it.child("email").getValue().toString()
+                    if (email == user.email){
+                        lista = it.child("favoritos").child("lista").getValue() as MutableList<String>
+                        createData()
+                    }
+                }.addOnFailureListener{
+                    Toast.makeText(requireActivity(),"Error", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }.addOnFailureListener{
+            Toast.makeText(requireActivity(),"Error", Toast.LENGTH_SHORT).show()
+        }
         super.onViewCreated(view, savedInstanceState)
-        createData()
 
     }
-
-   // private lateinit var recetas : ArrayList<Receta>
-
-    /*fun initInteractions(){
-        recetas = ArrayList<Receta>()
-        recetas.add(Receta("Prueba", "hola",R.drawable.logofondo))
-
-        val recetaa = recetas[0]
-        Log.i("Esto es receta",recetaa.toString())
-        //imageView.setImageResource(recetaa.imagen)
-        //name.text = recetaa.name
-        //labels.text = recetaa.labels
-
-        Log.i("esto es name", recetaa.name)
-        name.text = recetaa.name
-
-    }*/
-
 
     fun createData(){
 
         val requestQueue = Volley.newRequestQueue(activity)
-        val peticion = JsonObjectRequest(Request.Method.GET,url,null, Response.Listener {
-            val jsonArray  = it
+        for(receta in lista){
+            val url =
+                "https://api.edamam.com/search?q=$receta&app_id=7721e889&app_key=33ebd1f304fac28cd7809a27ade6ce9b&imagesize=thumbnail"
+            val peticion = JsonObjectRequest(Request.Method.GET,url,null, Response.Listener {
+                val jsonArray  = it
 
-            val recipes = jsonArray.getJSONArray("hits")
+                val recipes = jsonArray.getJSONArray("hits")
 
-            for (i in 0 until recipes.length()){
-                val re = recipes.getJSONObject(i)
+                for (i in 0 until recipes.length()){
 
-                val recipeInfoData = re.getJSONObject("recipe")
+                    val re = recipes.getJSONObject(i)
 
-                val label = recipeInfoData.getString("label")
-                val image = recipeInfoData.getString("image")
-                val mientras = recipeInfoData.getString("source")
-                recetas.add(Receta(label, mientras, image))
+                    val recipeInfoData = re.getJSONObject("recipe")
 
-            }
+                    val label = recipeInfoData.getString("label")
+                    Log.i("///////////LABEL///////////////",label)
+                    Log.i("///////////CONTAINS?///////////////",lista.contains(label).toString())
+                    val image = recipeInfoData.getString("image")
+                    val mientras = recipeInfoData.getString("source")
+                    if(lista.contains(label)){
+                        recetas.add(Receta(label, mientras, image))
+                        Log.i("----------RECIPES------------",recetas.toString())
+                        recyclerview.apply {
+                            layoutManager = LinearLayoutManager(activity)
+                            adapter = MisRecetasAdapter(recetas)
+                        }
+                    }
+                }
 
-            recyclerview.apply {
-                // set a LinearLayoutManager to handle Android
-                // RecyclerView behavior
-                layoutManager = LinearLayoutManager(activity)
-                // set the custom adapter to the RecyclerView
 
-                adapter = MisRecetasAdapter(recetas)
-            }
-        }, Response.ErrorListener {
-            Toast.makeText(activity,"Error al leer los datos json!", Toast.LENGTH_LONG).show()
-        })
-
-        requestQueue.add(peticion)
-
+            }, Response.ErrorListener {
+                Toast.makeText(activity,"Error al leer los datos json!", Toast.LENGTH_LONG).show()
+            })
+            requestQueue.add(peticion)
+        }
 
     }
-
-
 }
 
 

@@ -7,6 +7,7 @@ import android.view.View
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import androidx.recyclerview.widget.LinearLayoutManager
+import edu.itesm.appcocina.model.RecipeResult
 import kotlinx.android.synthetic.main.fragment_mis_recetas.*
 
 class MainActivity : AppCompatActivity() {
