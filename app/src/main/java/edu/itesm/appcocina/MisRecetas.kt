@@ -89,27 +89,21 @@ class MisRecetas : Fragment() {
                     val recipeInfoData = re.getJSONObject("recipe")
 
                     val label = recipeInfoData.getString("label")
-                    Log.i("///////////LABEL///////////////",label)
-                    Log.i("///////////CONTAINS?///////////////",lista.contains(label).toString())
                     val image = recipeInfoData.getString("image")
                     val mientras = recipeInfoData.getString("source")
                     if(lista.contains(label)){
                         recetas.add(Receta(label, mientras, image))
-                        Log.i("----------RECIPES------------",recetas.toString())
                         recyclerview.apply {
                             layoutManager = LinearLayoutManager(activity)
                             adapter = MisRecetasAdapter(recetas)
                         }
                     }
                 }
-
-
             }, Response.ErrorListener {
                 Toast.makeText(activity,"Error al leer los datos json!", Toast.LENGTH_LONG).show()
             })
             requestQueue.add(peticion)
         }
-
     }
 }
 
